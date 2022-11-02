@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import * as contactApi from "./shared";
 
 axios.defaults.baseURL = "https://connections-api.herokuapp.com";
 
@@ -62,7 +61,6 @@ export const fetchCurrentUser = createAsyncThunk(
         token.set(persisterToken)
         try {
             const { data } = await axios.get('/users/current');
-            console.log(data)
             return data
         } catch (error) {
             return error;
@@ -72,12 +70,12 @@ export const fetchCurrentUser = createAsyncThunk(
 
 export const fetchContacts = createAsyncThunk(
     "contacts/fetch",
-    async (_, thunkApi) => {
+    async (_, {rejectWithValue}) => {
         try {
-            const data = await contactApi.getFetch();
+            const { data } = await axios.get(`/contacts`);
             return data;
         } catch (error) {
-            return thunkApi.rejectWithValue(error);
+            return rejectWithValue(error);
         }
     }
 );
@@ -86,7 +84,7 @@ export const addContact = createAsyncThunk(
     "contacts/add",
     async (item, { rejectWithValue }) => {
         try {
-            const data = await contactApi.addToPhonebook(item);
+            const { data } = await axios.post("/contacts", item);
             return data
         } catch (error) {
             return rejectWithValue(error)
@@ -98,10 +96,25 @@ export const removeContact = createAsyncThunk(
     "contacts/delete",
     async (id, { rejectWithValue }) => {
         try {
-            await contactApi.removePhoneNumber(id)
+            await axios.delete(`/contacts/${id}`)
             return id
         } catch (error) {
             return rejectWithValue(error)
+        }
+    }
+);
+
+export const patchContact = createAsyncThunk(
+    "contacts/patch",
+    async (id, thunkApi) => {
+        const state = thunkApi.getState()
+        const userId = state.contacts.items.map(item => item.id)
+        try {
+            const { data } = await axios.patch(`/contacts/${id}`)
+            console.log(data)
+            return data
+        } catch (error) {
+            return thunkApi.rejectWithValue(error)
         }
     }
 );

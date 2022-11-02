@@ -3,13 +3,13 @@ import { getState } from '../redax/selectors';
 import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
 import { fetchCurrentUser } from 'redax/operation';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
+import RestrictedRoute from './RestrictedRoute/RestrictedRoute';
 
+const Contacts = lazy(() => import('../pages/Contacts/Contacts'));
 const Header = lazy(() => import('./Header/Header'));
 const RegisterUser = lazy(() => import('../pages/RegisterUser/RegisterUser'));
 const LoggedIn = lazy(() => import('../pages/LoggedIn/LoggedIn'));
-const FormContact = lazy(() => import('./Form/Form'));
-const Filter = lazy(() => import('./Filter/Filter'));
-const ListContacts = lazy(() => import('./List/List'));
 
 export const App = () => {
   const { loading, error } = useSelector(getState);
@@ -21,17 +21,36 @@ export const App = () => {
 
   return (
     <div>
-      <Suspense>
+      <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<Header />}>
-            <Route path="/register" element={<RegisterUser />} />
-            <Route path="/login" element={<LoggedIn />} />
-            <Route path="/contacts" element={<FormContact />} />
-            <Route path="/contacts" element={<Filter />} />
-            <Route path="/contacts" element={<ListContacts />} />
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute
+                  redirectTo="/contacts"
+                  component={<RegisterUser />}
+                />
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <RestrictedRoute
+                  redirectTo="/contacts"
+                  component={<LoggedIn />}
+                />
+              }
+            />
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute redirectTo="/login" component={<Contacts />} />
+              }
+            />
+            {loading && <p>...Loading</p>}
+            {error && <p>Somithing went wrong</p>}
           </Route>
-          {loading && <p>...Loading</p>}
-          {error && <p>Somithing went wrong</p>}
         </Routes>
       </Suspense>
     </div>

@@ -26,10 +26,16 @@ const userAccount = createSlice({
             state.token = null;
             state.isLoggedIn = false;
         },
+        [fetchCurrentUser.pending](state) {
+            state.isLoggedIn = true;
+        },
         [fetchCurrentUser.fulfilled](state, action) {
             state.body = action.payload;
             state.isLoggedIn = true;
-        }
+        },
+        [fetchCurrentUser.rejected](state) {
+            state.isLoggedIn = false;
+        },
     }
 })
 

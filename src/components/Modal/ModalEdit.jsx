@@ -1,37 +1,50 @@
-import PropTypes from 'prop-types';
+import { createPortal } from 'react-dom';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Outlet } from 'react-router-dom';
-import { addContact } from 'redax/operation';
-import { selectFilteredContacts } from 'redax/selectors';
+import { getContacts } from 'redax/selectors';
+import { patchContact } from 'redax/operation';
 
-const FormContact = () => {
+export const ModalEdit = ({ closeModal, editContact }) => {
+  const overlay = document.getElementById('popup-root');
   const dispatch = useDispatch();
-  const items = useSelector(selectFilteredContacts);
+  const items = useSelector(getContacts);
 
-  const handleSubmit = e => {
+  useEffect(() => {
+    window.addEventListener('keydown', onCloseEscape);
+
+    return () => {
+      window.removeEventListener('keydown', onCloseEscape);
+    };
+  });
+
+  const onCloseEscape = e => {
+    if (e.code === 'Escape') {
+      closeModal();
+    }
+  };
+
+  const onCloseClickBackdrop = e => {
+    if (e.currentTarget === e.target) {
+      closeModal();
+    }
+  };
+
+  const handleEdit = e => {
     e.preventDefault();
     const form = e.target;
     const {
       elements: { name, number },
     } = e.target;
-    const nameUser = items.find(
-      item => item.name === name.value ?? item.number === number.value
-    );
-    if (nameUser) {
-      return alert(`${nameUser.name} alredy have`);
-    }
-    dispatch(
-      addContact({
-        name: name.value,
-        number: number.value,
-      })
-    );
+    const userId = items.find(item => item.id);
+    const editContact = items.map(item => item.id);
+    console.log(editContact);
+    dispatch(patchContact());
     form.reset();
   };
-  return (
-    <div>
-      <h1>Phonebook</h1>
-      <form onSubmit={handleSubmit}>
+
+  return createPortal(
+    <div onClick={onCloseClickBackdrop}>
+      <form onSubmit={handleEdit}>
         <div
           style={{
             marginBottom: '10px',
@@ -79,16 +92,10 @@ const FormContact = () => {
           </label>
         </div>
         <button type="submit" style={{ marginBottom: '10px' }}>
-          Add Contact
+          Edit Contact
         </button>
       </form>
-      <Outlet />
-    </div>
+    </div>,
+    overlay
   );
 };
-
-FormContact.propTypes = {
-  lable: PropTypes.string,
-};
-
-export default FormContact;
