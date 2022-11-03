@@ -9,6 +9,7 @@ const Contacts = () => {
       <FormContact />
       <Filter />
       <ListContacts />
+      <ModalEdit />
     </>
   );
 };

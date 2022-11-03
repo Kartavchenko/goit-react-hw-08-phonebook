@@ -1,13 +1,14 @@
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getContacts } from 'redax/selectors';
+import { selectModalContact } from 'redax/selectors';
+import { editContact } from 'redax/modalSlice';
 import { patchContact } from 'redax/operation';
 
-export const ModalEdit = ({ closeModal, editContact }) => {
+export const ModalEdit = ({ closeModal }) => {
   const overlay = document.getElementById('popup-root');
   const dispatch = useDispatch();
-  const items = useSelector(getContacts);
+  const modalDataContact = useSelector(selectModalContact);
 
   useEffect(() => {
     window.addEventListener('keydown', onCloseEscape);
@@ -29,16 +30,23 @@ export const ModalEdit = ({ closeModal, editContact }) => {
     }
   };
 
+  const handleChange = e => {
+    const value = e.target.value;
+    dispatch(editContact(value));
+  };
+
   const handleEdit = e => {
     e.preventDefault();
     const form = e.target;
     const {
       elements: { name, number },
     } = e.target;
-    const userId = items.find(item => item.id);
-    const editContact = items.map(item => item.id);
-    console.log(editContact);
-    dispatch(patchContact());
+    dispatch(
+      patchContact(modalDataContact.id, {
+        name: name.value + modalDataContact.name,
+        number: number.value + modalDataContact.number,
+      })
+    );
     form.reset();
   };
 
@@ -64,6 +72,8 @@ export const ModalEdit = ({ closeModal, editContact }) => {
               }}
               type="text"
               name="name"
+              onChange={handleChange}
+              value={modalDataContact.name ?? ''}
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
@@ -85,6 +95,8 @@ export const ModalEdit = ({ closeModal, editContact }) => {
               }}
               type="tel"
               name="number"
+              onChange={handleChange}
+              value={modalDataContact.number ?? ''}
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required

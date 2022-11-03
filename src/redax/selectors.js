@@ -1,3 +1,5 @@
+export const selectModalContact = ({modal}) => modal
+
 export const selectIsLoggedIn = ({ user }) => user.isLoggedIn;
 
 export const selectIsRefreshing = ({user}) => user.isRefreshing

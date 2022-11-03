@@ -106,11 +106,11 @@ export const removeContact = createAsyncThunk(
 
 export const patchContact = createAsyncThunk(
     "contacts/patch",
-    async (id, thunkApi) => {
-        const state = thunkApi.getState()
-        const userId = state.contacts.items.map(item => item.id)
+    async (id, body, thunkApi) => {
+        // const state = thunkApi.getState()
+        // const changeContact = state.modal
         try {
-            const { data } = await axios.patch(`/contacts/${id}`)
+            const { data } = await axios.patch(`/contacts/${id}`, body)
             console.log(data)
             return data
         } catch (error) {

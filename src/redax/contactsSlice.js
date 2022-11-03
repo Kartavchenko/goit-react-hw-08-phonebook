@@ -1,22 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchContacts, addContact, removeContact, patchContact } from './operation';
-// import {editContact} from '../components/List/List'
 
 const initialState = {
     items: [],
     isLoading: false,
     error: null,
-    editForm: [],
 }
 
 const phoneContacts = createSlice({
   name: "contacts", 
   initialState,
-  reducers: {
-    editContact(state, { payload }) {
-      state.editForm.push(payload)
-    }
-  },
   extraReducers: {
     [fetchContacts.pending] (state)   {
       state.isLoading = true;
@@ -57,7 +50,6 @@ const phoneContacts = createSlice({
   }
 }) 
 
-export const {editContact} = phoneContacts.actions
 
 export const reduserContacts = phoneContacts.reducer
 

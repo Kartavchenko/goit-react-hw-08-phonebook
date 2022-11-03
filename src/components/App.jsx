@@ -20,7 +20,7 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <>
       <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<Header />}>
@@ -53,6 +53,6 @@ export const App = () => {
           </Route>
         </Routes>
       </Suspense>
-    </div>
+    </>
   );
 };

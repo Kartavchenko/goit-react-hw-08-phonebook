@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { removeContact, patchContact, fetchContacts } from 'redax/operation';
+import { removeContact, fetchContacts } from 'redax/operation';
+import { editContact } from 'redax/modalSlice';
 import { selectFilteredContacts } from 'redax/selectors';
-import { ModalEdit } from 'components/Modal/ModalEdit';
-
-// зробив редюсер контакт слайсу, зібрати данні з контакту і запушити за допомогою editContacts
 
 const ListContacts = () => {
   const items = useSelector(selectFilteredContacts);
@@ -19,9 +17,9 @@ const ListContacts = () => {
     return dispatch(removeContact(id));
   };
 
-  const editContact = id => {
-    console.log(items.find(item => item.id === id));
-    // return { id, name, number };
+  const editContactData = id => {
+    const dataContact = items.find(item => item.id === id);
+    return dispatch(editContact(dataContact));
   };
 
   const user = items.map(({ id, name, number }) => {
@@ -35,7 +33,7 @@ const ListContacts = () => {
         {name}: {number}
         <button
           type="button"
-          onClick={() => editContact(id)}
+          onClick={() => editContactData(id)}
           style={{
             marginLeft: '5px',
           }}
@@ -59,7 +57,6 @@ const ListContacts = () => {
     <>
       <h2>Contacts</h2>
       <ul>{user}</ul>
-      <ModalEdit editContact={editContact} />
     </>
   );
 };
