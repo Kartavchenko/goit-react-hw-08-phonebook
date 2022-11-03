@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[190],{2190:function(e,t,a){a.r(t);var n=a(1999),l=a(9434),r=a(5447),c=a(184);t.default=function(){var e=(0,l.I0)(),t=(0,l.v9)(n.aT);return(0,c.jsxs)("label",{style:{display:"flex",flexDirection:"column"},children:["Find contact by name",(0,c.jsx)("input",{style:{width:"200px",marginTop:"5px"},type:"text",name:"filter",value:t,onChange:function(t){var a=t.target.value;e((0,r.xO)(a))}})]})}}}]);
-//# sourceMappingURL=190.adba40d1.chunk.js.map
