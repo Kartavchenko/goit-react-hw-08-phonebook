@@ -11,7 +11,7 @@ const phoneContacts = createSlice({
   name: "contacts", 
   initialState,
   extraReducers: {
-    [fetchContacts.pending] (state)   {
+    [fetchContacts.pending] (state, {payload})   {
       state.isLoading = true;
     },
     [fetchContacts.fulfilled] (state, {payload}) {
@@ -45,7 +45,7 @@ const phoneContacts = createSlice({
     },
     [patchContact.fulfilled] (state, {payload})  {
       state.isLoading = false;
-      state.items.push(payload.data);
+      state.items = state.items.filter(item => item.id !== payload);
     },
   }
 }) 

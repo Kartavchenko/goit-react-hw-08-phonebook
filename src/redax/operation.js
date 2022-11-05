@@ -106,12 +106,11 @@ export const removeContact = createAsyncThunk(
 
 export const patchContact = createAsyncThunk(
     "contacts/patch",
-    async (id, body, thunkApi) => {
-        // const state = thunkApi.getState()
-        // const changeContact = state.modal
+    async (id, thunkApi) => {
+        const state = thunkApi.getState()
+        const { name, number } = state.modal.editContact
         try {
-            const { data } = await axios.patch(`/contacts/${id}`, body)
-            console.log(data)
+            const { data } = await axios.patch(`/contacts/${id}`, {name, number})
             return data
         } catch (error) {
             return thunkApi.rejectWithValue(error)

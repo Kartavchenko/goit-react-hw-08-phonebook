@@ -3,15 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { removeContact, fetchContacts } from 'redax/operation';
 import { editContact } from 'redax/modalSlice';
-import { selectFilteredContacts } from 'redax/selectors';
+import { selectFilteredContacts, selectModalContact } from 'redax/selectors';
 
 const ListContacts = () => {
-  const items = useSelector(selectFilteredContacts);
   const dispatch = useDispatch();
+  const items = useSelector(selectFilteredContacts);
+  const modalDataContact = useSelector(selectModalContact);
 
   useEffect(() => {
     dispatch(fetchContacts());
-  }, [dispatch]);
+  }, [dispatch, modalDataContact]);
 
   const deleteContact = id => {
     return dispatch(removeContact(id));
@@ -19,7 +20,7 @@ const ListContacts = () => {
 
   const editContactData = id => {
     const dataContact = items.find(item => item.id === id);
-    return dispatch(editContact(dataContact));
+    dispatch(editContact(dataContact));
   };
 
   const user = items.map(({ id, name, number }) => {

@@ -1,10 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+    editContact: null,
+    isOpen: false,
+}
+
 const modalContact = createSlice({
     name: "modal",
-    initialState: {},
+    initialState,
     reducers: {
-        editContact: (_, { payload }) => payload
+        editContact: (state, actions) => {state.editContact = actions.payload},
     }
 })
 

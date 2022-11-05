@@ -20,14 +20,20 @@ export const ItemRout = styled(NavLink)`
 `;
 
 export const ItemButton = styled.li`
+  display: flex;
   list-style: none;
   justify-content: center;
-  margin-left: 80px;
+  align-items: center;
+`;
+
+export const NameUser = styled.p`
+  margin: 0;
 `;
 
 export const BtnLogOut = styled.button`
   padding: 5px;
   border-radius: 5px;
+  margin-left: 10px;
   border: none;
   background-color: #d0c7ff;
   cursor: pointer;

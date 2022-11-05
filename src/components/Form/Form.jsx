@@ -28,6 +28,7 @@ const FormContact = () => {
     );
     form.reset();
   };
+
   return (
     <div>
       <h1>Phonebook</h1>

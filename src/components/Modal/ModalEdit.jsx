@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectModalContact } from 'redax/selectors';
 import { editContact } from 'redax/modalSlice';
 import { patchContact } from 'redax/operation';
+import { Overlay, FormModal, InputForm } from './modal.styled';
 
-export const ModalEdit = ({ closeModal }) => {
+export const ModalEdit = () => {
   const overlay = document.getElementById('popup-root');
   const dispatch = useDispatch();
   const modalDataContact = useSelector(selectModalContact);
@@ -17,6 +18,10 @@ export const ModalEdit = ({ closeModal }) => {
       window.removeEventListener('keydown', onCloseEscape);
     };
   });
+
+  const closeModal = () => {
+    dispatch(editContact(null));
+  };
 
   const onCloseEscape = e => {
     if (e.code === 'Escape') {
@@ -30,29 +35,23 @@ export const ModalEdit = ({ closeModal }) => {
     }
   };
 
-  const handleChange = e => {
-    const value = e.target.value;
-    dispatch(editContact(value));
-  };
-
   const handleEdit = e => {
     e.preventDefault();
     const form = e.target;
-    const {
-      elements: { name, number },
-    } = e.target;
-    dispatch(
-      patchContact(modalDataContact.id, {
-        name: name.value + modalDataContact.name,
-        number: number.value + modalDataContact.number,
-      })
-    );
+    // const {
+    //   elements: { name, number },
+    // } = e.target;
+    dispatch(patchContact(modalDataContact.id), {
+      name: modalDataContact.name,
+      number: modalDataContact.number,
+    });
+    closeModal();
     form.reset();
   };
 
   return createPortal(
-    <div onClick={onCloseClickBackdrop}>
-      <form onSubmit={handleEdit}>
+    <Overlay onClick={onCloseClickBackdrop}>
+      <FormModal onSubmit={handleEdit}>
         <div
           style={{
             marginBottom: '10px',
@@ -65,15 +64,23 @@ export const ModalEdit = ({ closeModal }) => {
             }}
           >
             Name
-            <input
+            <InputForm
               style={{
                 width: '200px',
                 marginTop: '5px',
               }}
               type="text"
               name="name"
-              onChange={handleChange}
-              value={modalDataContact.name ?? ''}
+              onChange={e =>
+                dispatch(
+                  editContact({
+                    id: modalDataContact.id,
+                    name: e.target.value,
+                    number: modalDataContact.number,
+                  })
+                )
+              }
+              value={modalDataContact.name}
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
@@ -88,15 +95,23 @@ export const ModalEdit = ({ closeModal }) => {
             }}
           >
             Number
-            <input
+            <InputForm
               style={{
                 width: '200px',
                 marginTop: '5px',
               }}
               type="tel"
               name="number"
-              onChange={handleChange}
-              value={modalDataContact.number ?? ''}
+              onChange={e =>
+                dispatch(
+                  editContact({
+                    id: modalDataContact.id,
+                    name: modalDataContact.name,
+                    number: e.target.value,
+                  })
+                )
+              }
+              value={modalDataContact.number}
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
@@ -106,8 +121,8 @@ export const ModalEdit = ({ closeModal }) => {
         <button type="submit" style={{ marginBottom: '10px' }}>
           Edit Contact
         </button>
-      </form>
-    </div>,
+      </FormModal>
+    </Overlay>,
     overlay
   );
 };
