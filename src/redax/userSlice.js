@@ -5,6 +5,7 @@ const initialState = {
     body: { name: null, email: null, password: null },
     token: null,
     isLoggedIn: false,
+    error: null,
 }
 
 const userAccount = createSlice({
@@ -20,6 +21,9 @@ const userAccount = createSlice({
             state.body = action.payload.user;
             state.token = action.payload.token;
             state.isLoggedIn = true;
+        },
+        [userLoggedIn.rejected](state) {
+            state.error = null;
         },
         [userLogOut.fulfilled](state) {
             state.body = { name: null, email: null, password: null };

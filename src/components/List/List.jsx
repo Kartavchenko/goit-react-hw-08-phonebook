@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { removeContact, fetchContacts } from 'redax/operation';
 import { editContact } from 'redax/modalSlice';
 import { selectFilteredContacts, selectModalContact } from 'redax/selectors';
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 
 const ListContacts = () => {
   const dispatch = useDispatch();
@@ -25,29 +26,13 @@ const ListContacts = () => {
 
   const user = items.map(({ id, name, number }) => {
     return (
-      <li
-        key={id}
-        style={{
-          marginBottom: '10px',
-        }}
-      >
+      <li key={id}>
+        <ContactPhoneIcon color="primary" />
         {name}: {number}
-        <button
-          type="button"
-          onClick={() => editContactData(id)}
-          style={{
-            marginLeft: '5px',
-          }}
-        >
+        <button type="button" onClick={() => editContactData(id)}>
           Edit
         </button>
-        <button
-          type="button"
-          onClick={() => deleteContact(id)}
-          style={{
-            marginLeft: '5px',
-          }}
-        >
+        <button type="button" onClick={() => deleteContact(id)}>
           Delete
         </button>
       </li>

@@ -1,6 +1,17 @@
 import { useDispatch } from 'react-redux';
 import { userRegister } from 'redax/operation';
-
+import { NavLink } from 'react-router-dom';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import {
+  Box,
+  TextField,
+  Button,
+  Grid,
+  Container,
+  CssBaseline,
+  Avatar,
+  Typography,
+} from '@mui/material';
 const RegisterUser = () => {
   const dispatch = useDispatch();
 
@@ -8,11 +19,11 @@ const RegisterUser = () => {
     e.preventDefault();
     const form = e.target;
     const {
-      elements: { userName, email, password },
+      elements: { name, email, password },
     } = e.target;
     dispatch(
       userRegister({
-        name: userName.value,
+        name: name.value,
         email: email.value,
         password: password.value,
       })
@@ -20,76 +31,77 @@ const RegisterUser = () => {
     form.reset();
   };
   return (
-    <div
-      style={{
-        marginLeft: '50px',
-        marginTop: '50px',
-      }}
-    >
-      <form onSubmit={handleSinghup}>
-        <div
-          style={{
-            marginBottom: '10px',
-          }}
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Register
+        </Typography>
+        <Box
+          component="form"
+          onSubmit={handleSinghup}
+          noValidate
+          sx={{ mt: 1 }}
         >
-          <label
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="name"
+            label="Name"
+            name="name"
+            autoComplete="name"
+            autoFocus
           >
             Name
-            <input
-              style={{
-                width: '200px',
-                marginTop: '5px',
-              }}
-              type="text"
-              name="userName"
-            />
-          </label>
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          <label
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
+          </TextField>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
           >
             Email
-            <input
-              style={{
-                width: '200px',
-                marginTop: '5px',
-              }}
-              type="tel"
-              name="email"
-            />
-          </label>
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          <label
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
+          </TextField>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
           >
             Password
-            <input
-              style={{
-                width: '200px',
-                marginTop: '5px',
-              }}
-              type="tel"
-              name="password"
-            />
-          </label>
-        </div>
-        <button type="submit" style={{ marginBottom: '10px' }}>
-          Signup
-        </button>
-      </form>
-    </div>
+          </TextField>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Signup
+          </Button>
+          <Grid container justifyContent="flex-end">
+            <NavLink to="/login">Already have an account? Sign in</NavLink>
+          </Grid>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 

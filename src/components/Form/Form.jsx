@@ -33,23 +33,10 @@ const FormContact = () => {
     <div>
       <h1>Phonebook</h1>
       <form onSubmit={handleSubmit}>
-        <div
-          style={{
-            marginBottom: '10px',
-          }}
-        >
-          <label
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
+        <div>
+          <label>
             Name
             <input
-              style={{
-                width: '200px',
-                marginTop: '5px',
-              }}
               type="text"
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -58,19 +45,10 @@ const FormContact = () => {
             />
           </label>
         </div>
-        <div style={{ marginBottom: '10px' }}>
-          <label
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
+        <div>
+          <label>
             Number
             <input
-              style={{
-                width: '200px',
-                marginTop: '5px',
-              }}
               type="tel"
               name="number"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -79,9 +57,7 @@ const FormContact = () => {
             />
           </label>
         </div>
-        <button type="submit" style={{ marginBottom: '10px' }}>
-          Add Contact
-        </button>
+        <button type="submit">Add Contact</button>
       </form>
       <Outlet />
     </div>

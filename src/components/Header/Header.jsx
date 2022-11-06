@@ -2,14 +2,12 @@ import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogOut } from '../../redax/operation';
 import { selectIsLoggedIn, selectUserData } from 'redax/selectors';
-import {
-  ItemRout,
-  ItemButton,
-  List,
-  BtnLogOut,
-  HeaderStyle,
-  NameUser,
-} from './header.styled.js';
+import { NavLink } from 'react-router-dom';
+import './header.css';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import '@fontsource/roboto/500.css';
+import { Button, Stack, Avatar, Typography } from '@mui/material';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -20,33 +18,63 @@ const Header = () => {
     dispatch(userLogOut());
   };
 
-  // continue make disign site, finish make header list
-
   return (
     <>
-      <HeaderStyle>
-        <List>
+      <header>
+        <ul className="list">
           {!isLoggedIn ? (
-            <>
-              <ItemRout to="/register">Register</ItemRout>
-              <ItemRout to="/login">Login In</ItemRout>
-            </>
+            <Stack spacing={2} direction="row">
+              <li>
+                <Button variant="outlined">
+                  <NavLink className="navLinkStyle" to="/register">
+                    Register
+                  </NavLink>
+                </Button>
+              </li>
+              <li>
+                <Button variant="contained">
+                  <NavLink className="navLinkStyle btnLogin" to="/login">
+                    Login In
+                  </NavLink>
+                </Button>
+              </li>
+            </Stack>
           ) : (
-            <ItemButton>
-              <ul>
+            <li>
+              <ul className="list">
                 <li>
-                  <NameUser>Welcome {nameUser.name}</NameUser>
+                  <NavLink className="navLinkStyle" to="/">
+                    Main
+                  </NavLink>
                 </li>
                 <li>
-                  <BtnLogOut type="button" onClick={handleLogOut}>
+                  <NavLink className="navLinkStyle" to="/contacts">
+                    Phonebook
+                  </NavLink>
+                </li>
+                <li>
+                  <Typography className="userName">
+                    Welcome {nameUser.name}
+                  </Typography>
+                </li>
+                <li>
+                  <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <AssignmentIndIcon />
+                  </Avatar>
+                  <Button
+                    type="button"
+                    onClick={handleLogOut}
+                    variant="outlined"
+                  >
+                    <ExitToAppIcon />
                     Log Out
-                  </BtnLogOut>
+                  </Button>
                 </li>
               </ul>
-            </ItemButton>
+            </li>
           )}
-        </List>
-      </HeaderStyle>
+        </ul>
+      </header>
       <main>
         <Outlet />
       </main>

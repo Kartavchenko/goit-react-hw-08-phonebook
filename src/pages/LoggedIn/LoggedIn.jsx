@@ -1,5 +1,17 @@
 import { useDispatch } from 'react-redux';
 import { userLoggedIn } from 'redax/operation';
+import { NavLink } from 'react-router-dom';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import {
+  Box,
+  TextField,
+  Button,
+  Grid,
+  Container,
+  CssBaseline,
+  Avatar,
+  Typography,
+} from '@mui/material';
 
 const LoggedIn = () => {
   const dispatch = useDispatch();
@@ -10,6 +22,9 @@ const LoggedIn = () => {
     const {
       elements: { email, password },
     } = e.target;
+    if (email.value === '' || password.value === '') {
+      return;
+    }
     dispatch(
       userLoggedIn({
         email: email.value,
@@ -19,54 +34,63 @@ const LoggedIn = () => {
     form.reset();
   };
   return (
-    <div
-      style={{
-        marginLeft: '50px',
-        marginTop: '50px',
-      }}
-    >
-      <form onSubmit={handleLogin}>
-        <div style={{ marginBottom: '10px' }}>
-          <label
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Login in
+        </Typography>
+        <Box component="form" onSubmit={handleLogin} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
           >
             Email
-            <input
-              style={{
-                width: '200px',
-                marginTop: '5px',
-              }}
-              type="tel"
-              name="email"
-            />
-          </label>
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          <label
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
+          </TextField>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
           >
             Password
-            <input
-              style={{
-                width: '200px',
-                marginTop: '5px',
-              }}
-              type="tel"
-              name="password"
-            />
-          </label>
-        </div>
-        <button type="submit" style={{ marginBottom: '10px' }}>
-          Login In
-        </button>
-      </form>
-    </div>
+          </TextField>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Login In
+          </Button>
+          <Grid container sx={{ justifyContent: 'center' }}>
+            <NavLink to="/register">
+              {"Don't have an account? Register Up"}
+            </NavLink>
+          </Grid>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 
