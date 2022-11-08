@@ -2,14 +2,7 @@ import { selectStatusFilter } from 'redax/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterContacts } from 'redax/filterSlise';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import {
-  Typography,
-  Box,
-  Input,
-  InputLabel,
-  TextField,
-  InputAdornment,
-} from '@mui/material';
+import { Box, TextField, InputAdornment } from '@mui/material';
 
 function Filter() {
   const dispatch = useDispatch();
