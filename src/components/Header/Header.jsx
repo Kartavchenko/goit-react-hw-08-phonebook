@@ -7,7 +7,15 @@ import './header.css';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import '@fontsource/roboto/500.css';
-import { Button, Stack, Avatar, Typography } from '@mui/material';
+import Grid2 from '@mui/material/Unstable_Grid2';
+import {
+  Button,
+  Stack,
+  Avatar,
+  Typography,
+  Box,
+  Container,
+} from '@mui/material';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -19,11 +27,29 @@ const Header = () => {
   };
 
   return (
-    <>
+    <Container>
       <header>
-        <ul className="list">
+        <Box
+          component="ul"
+          className="list"
+          sx={{
+            borderBottom: '1px solid grey',
+            pb: 2,
+          }}
+        >
           {!isLoggedIn ? (
-            <Stack spacing={2} direction="row">
+            <Stack
+              spacing={2}
+              direction="row"
+              sx={{ justifyContent: 'center' }}
+            >
+              <li>
+                <Button variant="button">
+                  <NavLink className="navLinkStyle" to="/">
+                    Main
+                  </NavLink>
+                </Button>
+              </li>
               <li>
                 <Button variant="outlined">
                   <NavLink className="navLinkStyle" to="/register">
@@ -41,26 +67,41 @@ const Header = () => {
             </Stack>
           ) : (
             <li>
-              <ul className="list">
-                <li>
+              <Grid2
+                component="ul"
+                container
+                direction="row"
+                spacing={5}
+                sx={{
+                  listStyle: 'none',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Grid2 component="li">
                   <NavLink className="navLinkStyle" to="/">
-                    Main
+                    <Typography variant="button">Main</Typography>
                   </NavLink>
-                </li>
-                <li>
+                </Grid2>
+                <Grid2 component="li">
                   <NavLink className="navLinkStyle" to="/contacts">
-                    Phonebook
+                    <Typography variant="button">Phonebook</Typography>
                   </NavLink>
-                </li>
-                <li>
-                  <Typography className="userName">
+                </Grid2>
+                <Grid2 component="li">
+                  <Typography variant="subtitle1">
                     Welcome {nameUser.name}
                   </Typography>
-                </li>
-                <li>
-                  <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                    <AssignmentIndIcon />
-                  </Avatar>
+                </Grid2>
+                <Avatar
+                  sx={{
+                    m: 1,
+                    bgcolor: 'secondary.main',
+                  }}
+                >
+                  <AssignmentIndIcon />
+                </Avatar>
+                <Grid2 component="li">
                   <Button
                     type="button"
                     onClick={handleLogOut}
@@ -69,16 +110,16 @@ const Header = () => {
                     <ExitToAppIcon />
                     Log Out
                   </Button>
-                </li>
-              </ul>
+                </Grid2>
+              </Grid2>
             </li>
           )}
-        </ul>
+        </Box>
       </header>
       <main>
         <Outlet />
       </main>
-    </>
+    </Container>
   );
 };
 

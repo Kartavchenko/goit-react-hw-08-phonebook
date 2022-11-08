@@ -4,7 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectModalContact } from 'redax/selectors';
 import { editContact } from 'redax/modalSlice';
 import { patchContact } from 'redax/operation';
-import { Overlay, FormModal, InputForm } from './modal.styled';
+import SaveIcon from '@mui/icons-material/Save';
+import { Typography, Button } from '@mui/material';
+import { Overlay, FormModal, InputForm, BoxInput } from './modal.styled';
 
 export const ModalEdit = () => {
   const overlay = document.getElementById('popup-root');
@@ -52,23 +54,10 @@ export const ModalEdit = () => {
   return createPortal(
     <Overlay onClick={onCloseClickBackdrop}>
       <FormModal onSubmit={handleEdit}>
-        <div
-          style={{
-            marginBottom: '10px',
-          }}
-        >
-          <label
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            Name
+        <BoxInput>
+          <label>
+            <Typography variant="overline">Name</Typography>
             <InputForm
-              style={{
-                width: '200px',
-                marginTop: '5px',
-              }}
               type="text"
               name="name"
               onChange={e =>
@@ -86,20 +75,11 @@ export const ModalEdit = () => {
               required
             />
           </label>
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          <label
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            Number
+        </BoxInput>
+        <BoxInput>
+          <label>
+            <Typography variant="overline">Number</Typography>
             <InputForm
-              style={{
-                width: '200px',
-                marginTop: '5px',
-              }}
               type="tel"
               name="number"
               onChange={e =>
@@ -117,10 +97,17 @@ export const ModalEdit = () => {
               required
             />
           </label>
-        </div>
-        <button type="submit" style={{ marginBottom: '10px' }}>
-          Edit Contact
-        </button>
+        </BoxInput>
+        <Button
+          type="submit"
+          size="small"
+          color="primary"
+          startIcon={<SaveIcon />}
+          variant="contained"
+          sx={{ mt: 2 }}
+        >
+          Save Contact
+        </Button>
       </FormModal>
     </Overlay>,
     overlay

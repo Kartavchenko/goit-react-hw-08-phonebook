@@ -6,13 +6,14 @@ import { fetchCurrentUser } from 'redax/operation';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import RestrictedRoute from './RestrictedRoute/RestrictedRoute';
 
+const MainPage = lazy(() => import('../pages/Main/Main'));
 const Contacts = lazy(() => import('../pages/Contacts/Contacts'));
 const Header = lazy(() => import('./Header/Header'));
 const RegisterUser = lazy(() => import('../pages/RegisterUser/RegisterUser'));
 const LoggedIn = lazy(() => import('../pages/LoggedIn/LoggedIn'));
 
 export const App = () => {
-  const { loading, error } = useSelector(getState);
+  const { error } = useSelector(getState);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export const App = () => {
       <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<Header />}>
+            <Route path="/" element={<MainPage />} />
             <Route
               path="/register"
               element={
@@ -48,7 +50,6 @@ export const App = () => {
                 <PrivateRoute redirectTo="/login" component={<Contacts />} />
               }
             />
-            {loading && <p>...Loading</p>}
             {error && <p>Somithing went wrong</p>}
           </Route>
         </Routes>

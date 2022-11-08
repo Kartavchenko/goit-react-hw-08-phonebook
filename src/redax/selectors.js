@@ -8,7 +8,7 @@ export const selectIsLoggedIn = ({ user }) => user.isLoggedIn;
 
 export const selectStatusFilter = ({ filter }) => filter;
 
-export const getState = ({ contacts }) => ({ loading: contacts.loading, error: contacts.error });
+export const getState = ({ contacts }) => ({ loading: contacts.isLoading, error: contacts.error });
 
 export const getContacts = ({ contacts }) => contacts.items;
 

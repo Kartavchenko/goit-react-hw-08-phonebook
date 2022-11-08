@@ -11,7 +11,7 @@ const phoneContacts = createSlice({
   name: "contacts", 
   initialState,
   extraReducers: {
-    [fetchContacts.pending] (state, {payload})   {
+    [fetchContacts.pending] (state)   {
       state.isLoading = true;
     },
     [fetchContacts.fulfilled] (state, {payload}) {
@@ -25,7 +25,8 @@ const phoneContacts = createSlice({
     [addContact.pending](state) {
       state.isLoading = true;
     },
-     [addContact.fulfilled](state, {payload}) {
+    [addContact.fulfilled](state, { payload }) {
+      state.isLoading = false;
       state.items.push(payload)
     },
     [addContact.rejected] (state, {payload})  {
