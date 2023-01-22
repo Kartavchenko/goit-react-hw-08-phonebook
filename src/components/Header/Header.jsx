@@ -2,20 +2,20 @@ import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogOut } from '../../redax/operation';
 import { selectIsLoggedIn, selectUserData } from 'redax/selectors';
-import { NavLink } from 'react-router-dom';
-import './header.css';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import LogoutIcon from '@mui/icons-material/Logout';
+import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import '@fontsource/roboto/500.css';
 import Grid2 from '@mui/material/Unstable_Grid2';
+import { Button, Container, Typography } from '@mui/material';
 import {
-  Button,
-  Stack,
-  Avatar,
-  Typography,
-  Box,
-  Container,
-} from '@mui/material';
+  MyAvatar,
+  MyBox,
+  MyGridList,
+  MyNavLink,
+  MyNavLinkLogin,
+  HeaderTag,
+  MyTypography,
+} from './Header.styled';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -27,99 +27,67 @@ const Header = () => {
   };
 
   return (
-    <Container>
-      <header>
-        <Box
-          component="ul"
-          className="list"
-          sx={{
-            borderBottom: '1px solid grey',
-            pb: 2,
-          }}
-        >
+    <>
+      <HeaderTag component="header">
+        <MyBox>
           {!isLoggedIn ? (
-            <Stack
-              spacing={2}
-              direction="row"
-              sx={{ justifyContent: 'center' }}
-            >
-              <li>
+            <MyGridList component="ul" container direction="row" spacing={5}>
+              <Grid2 component="li">
                 <Button variant="button">
-                  <NavLink className="navLinkStyle" to="/">
-                    Main
-                  </NavLink>
+                  <MyNavLink to="/">Main</MyNavLink>
                 </Button>
-              </li>
-              <li>
+              </Grid2>
+              <Grid2 component="li">
                 <Button variant="outlined">
-                  <NavLink className="navLinkStyle" to="/register">
-                    Register
-                  </NavLink>
+                  <MyNavLink to="/register">Register</MyNavLink>
                 </Button>
-              </li>
-              <li>
+              </Grid2>
+              <Grid2 component="li">
                 <Button variant="contained">
-                  <NavLink className="navLinkStyle btnLogin" to="/login">
-                    Login In
-                  </NavLink>
+                  <MyNavLinkLogin to="/login">Login In</MyNavLinkLogin>
                 </Button>
-              </li>
-            </Stack>
+              </Grid2>
+            </MyGridList>
           ) : (
             <li>
-              <Grid2
-                component="ul"
-                container
-                direction="row"
-                spacing={5}
-                sx={{
-                  listStyle: 'none',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
+              <MyGridList component="ul" container direction="row" spacing={5}>
                 <Grid2 component="li">
-                  <NavLink className="navLinkStyle" to="/">
-                    <Typography variant="button">Main</Typography>
-                  </NavLink>
+                  <MyNavLink to="/">
+                    <MyTypography variant="button">Main</MyTypography>
+                  </MyNavLink>
                 </Grid2>
                 <Grid2 component="li">
-                  <NavLink className="navLinkStyle" to="/contacts">
-                    <Typography variant="button">Phonebook</Typography>
-                  </NavLink>
+                  <MyNavLink to="/contacts">
+                    <MyTypography variant="button">Phonebook</MyTypography>
+                  </MyNavLink>
                 </Grid2>
                 <Grid2 component="li">
                   <Typography variant="subtitle1">
                     Welcome {nameUser.name}
                   </Typography>
                 </Grid2>
-                <Avatar
-                  sx={{
-                    m: 1,
-                    bgcolor: 'secondary.main',
-                  }}
-                >
-                  <AssignmentIndIcon />
-                </Avatar>
+                <MyAvatar>
+                  <FaceRetouchingNaturalIcon />
+                </MyAvatar>
                 <Grid2 component="li">
                   <Button
                     type="button"
                     onClick={handleLogOut}
                     variant="outlined"
                   >
-                    <ExitToAppIcon />
+                    <LogoutIcon />
                     Log Out
                   </Button>
                 </Grid2>
-              </Grid2>
+              </MyGridList>
             </li>
           )}
-        </Box>
-      </header>
-      <main>
+        </MyBox>
+      </HeaderTag>
+      <Container component="main">
         <Outlet />
-      </main>
-    </Container>
+      </Container>
+    </>
   );
 };
 

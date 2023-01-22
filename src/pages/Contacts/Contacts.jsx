@@ -22,11 +22,13 @@ const Contacts = () => {
         Contacts
       </Typography>
       <ListContacts />
-      {loading && (
-        <Typography variant="h6" sx={{ ml: 5 }}>
-          ...Loading
-        </Typography>
-      )}
+      {!openModal
+        ? loading && (
+            <Typography variant="h6" sx={{ ml: 5 }}>
+              ...Loading
+            </Typography>
+          )
+        : null}
       {openModal ? <ModalEdit /> : closeModal}
     </Box>
   );

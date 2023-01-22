@@ -40,9 +40,6 @@ export const ModalEdit = () => {
   const handleEdit = e => {
     e.preventDefault();
     const form = e.target;
-    // const {
-    //   elements: { name, number },
-    // } = e.target;
     dispatch(patchContact(modalDataContact.id), {
       name: modalDataContact.name,
       number: modalDataContact.number,
