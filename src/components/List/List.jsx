@@ -9,7 +9,7 @@ import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Grid2 from '@mui/material/Unstable_Grid2';
-import { Typography, Box, Button } from '@mui/material';
+import { Typography, Button, Box } from '@mui/material';
 
 const ListContacts = () => {
   const dispatch = useDispatch();

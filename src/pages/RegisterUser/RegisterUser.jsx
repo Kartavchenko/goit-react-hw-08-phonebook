@@ -8,10 +8,10 @@ import {
   Button,
   Grid,
   Container,
-  CssBaseline,
   Avatar,
   Typography,
 } from '@mui/material';
+
 const RegisterUser = () => {
   const dispatch = useDispatch();
 
@@ -31,11 +31,10 @@ const RegisterUser = () => {
     form.reset();
   };
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Box
+    <Box>
+      <Container
+        maxWidth="sm"
         sx={{
-          marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -100,8 +99,8 @@ const RegisterUser = () => {
             <NavLink to="/login">Already have an account? Sign in</NavLink>
           </Grid>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 

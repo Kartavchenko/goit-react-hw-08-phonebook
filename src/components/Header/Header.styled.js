@@ -4,12 +4,14 @@ import Grid2 from '@mui/material/Unstable_Grid2';
 import {
   Avatar,
   Box,
+  Button,
   Typography
 } from '@mui/material';
 
-export const HeaderTag = styled(Box)`
-  width: 100vw; 
-  background-color: rgb(113, 157, 235, 0.7);
+export const HeaderBox = styled(Box)`
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
 `;
 
 export const MyTypography = styled(Typography)`
@@ -34,22 +36,30 @@ export const MyBox = styled(Box)`
   padding-left: 0;
 `;
 
-export const MyGridList = styled(Grid2)`
+export const List = styled(Grid2)`
   list-style: none;
   align-items: center;
   justify-content: center;
   padding-left: 0;
 `;
 
+export const Items = styled(Grid2)`
+  margin-right: 25px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+`;
+
 export const MyAvatar = styled(Avatar)`
   background-color: #6f1cff;
+  margin-right: 25px;
 `;
 
 export const MyNavLink = styled(NavLink)`
   text-decoration: none;  
 `;
 
-export const MyNavLinkLogin = styled(NavLink)`
-  color: white;
-  text-decoration: none;  
-`;
+export const RegisterBtn = styled(Button)`
+background-color: rgba(220, 220, 220, 0.5);
+`

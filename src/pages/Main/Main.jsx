@@ -1,10 +1,11 @@
-import { Typography } from '@mui/material';
+import { Container } from '@mui/material';
+import { WelcomTypo } from './Main.styled';
 
 const Main = () => {
   return (
-    <Typography variant="h3" sx={{ display: 'flex', justifyContent: 'center' }}>
-      Welcome to contacts manager
-    </Typography>
+    <Container>
+      <WelcomTypo variant="h3">Welcome to contacts manager</WelcomTypo>
+    </Container>
   );
 };
 export default Main;

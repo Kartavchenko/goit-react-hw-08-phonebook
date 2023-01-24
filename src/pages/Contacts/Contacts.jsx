@@ -4,7 +4,8 @@ import ListContacts from 'components/List/List';
 import { useSelector } from 'react-redux';
 import { selectModalOpen, selectModalContact, getState } from 'redax/selectors';
 import { ModalEdit } from 'components/Modal/ModalEdit';
-import { Typography, Box } from '@mui/material';
+import { Typography } from '@mui/material';
+import { MyBox } from './Contacts.styled';
 
 const Contacts = () => {
   const closeModal = useSelector(selectModalOpen);
@@ -12,7 +13,7 @@ const Contacts = () => {
   const { loading } = useSelector(getState);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <MyBox sx={{ flexGrow: 1 }}>
       <Typography component="h2" variant="h5">
         Add Contact
       </Typography>
@@ -30,7 +31,7 @@ const Contacts = () => {
           )
         : null}
       {openModal ? <ModalEdit /> : closeModal}
-    </Box>
+    </MyBox>
   );
 };
 

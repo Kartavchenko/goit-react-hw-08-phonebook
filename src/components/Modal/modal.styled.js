@@ -1,4 +1,9 @@
 import styled from "@emotion/styled";
+// import { styled } from '@mui/material/styles';
+// import {
+//     Box,
+// } from '@mui/material';
+// import imageBg from "../../images/dark-background-white-note-pen.jpg";
 
 export const Overlay = styled.div`
     position: fixed;
@@ -17,7 +22,7 @@ export const FormModal = styled.form`
     padding: 20px;
     border: 2px solid rgb(181, 170, 242);
     border-radius: 10px;
-    background-color: whitesmoke;
+    background-image: url(../../images/dark_background_white_note_pen.jpg);
     box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1),
              0.3em 0.3em 1em rgba(0,0,0,0.3);
 `;
