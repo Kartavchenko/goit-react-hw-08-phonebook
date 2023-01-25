@@ -1,16 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { getState } from '../redax/selectors';
+import { getState } from './redax/selectors';
 import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
 import { fetchCurrentUser } from 'redax/operation';
-import PrivateRoute from './PrivateRoute/PrivateRoute';
-import RestrictedRoute from './RestrictedRoute/RestrictedRoute';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import RestrictedRoute from './components/RestrictedRoute/RestrictedRoute';
 
-const MainPage = lazy(() => import('../pages/Main/Main'));
-const Contacts = lazy(() => import('../pages/Contacts/Contacts'));
-const Header = lazy(() => import('./Header/Header'));
-const RegisterUser = lazy(() => import('../pages/RegisterUser/RegisterUser'));
-const LoggedIn = lazy(() => import('../pages/LoggedIn/LoggedIn'));
+const MainPage = lazy(() => import('./pages/Main/Main'));
+const Contacts = lazy(() => import('./pages/Contacts/Contacts'));
+const Header = lazy(() => import('./components/Header/Header'));
+const RegisterUser = lazy(() => import('./pages/RegisterUser/RegisterUser'));
+const LoggedIn = lazy(() => import('./pages/LoggedIn/LoggedIn'));
 
 export const App = () => {
   const { error } = useSelector(getState);
