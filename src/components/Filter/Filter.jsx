@@ -1,8 +1,9 @@
 import { selectStatusFilter } from 'redax/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterContacts } from 'redax/filterSlise';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import { Box, TextField, InputAdornment } from '@mui/material';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+import { Box, InputAdornment } from '@mui/material';
+import { SearchField } from './Filter.styled';
 
 function Filter() {
   const dispatch = useDispatch();
@@ -14,26 +15,24 @@ function Filter() {
   };
   return (
     <Box sx={{ width: '250px' }}>
-      <TextField
+      <SearchField
         type="text"
         name="search"
         margin="normal"
         fullWidth
         size="small"
         label="Seacr Contact"
+        color="secondary"
         value={contactsFilter}
         onChange={handleFilter}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <AccountCircle color="primary" />
+              <PersonSearchIcon color="primary" />
             </InputAdornment>
           ),
         }}
-      >
-        <AccountCircle />
-        Find contact by name
-      </TextField>
+      ></SearchField>
     </Box>
   );
 }

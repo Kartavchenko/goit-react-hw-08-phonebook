@@ -6,7 +6,8 @@ import { selectFilteredContacts } from 'redax/selectors';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import PhoneIcon from '@mui/icons-material/Phone';
 import PersonIcon from '@mui/icons-material/Person';
-import { Button, Box, TextField, InputAdornment } from '@mui/material';
+import { Box, InputAdornment } from '@mui/material';
+import { BtnAddContact, FormField } from './Form.styled';
 
 const FormContact = () => {
   const dispatch = useDispatch();
@@ -36,14 +37,14 @@ const FormContact = () => {
   return (
     <Box sx={{ width: '250px' }}>
       <form onSubmit={handleSubmit}>
-        <TextField
+        <FormField
           required
           name="name"
           label="Name"
           fullWidth
           variant="outlined"
+          color="secondary"
           size="small"
-          sx={{ mt: 2 }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -59,16 +60,16 @@ const FormContact = () => {
           }}
         >
           Name
-        </TextField>
-        <TextField
+        </FormField>
+        <FormField
           type="tel"
           required
           name="number"
           label="Number"
           fullWidth
           variant="outlined"
+          color="secondary"
           size="small"
-          sx={{ mt: 2 }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -84,17 +85,14 @@ const FormContact = () => {
           }}
         >
           Number
-        </TextField>
-        <Button
-          size="small"
-          color="primary"
-          startIcon={<AddCircleOutlineIcon />}
-          variant="contained"
+        </FormField>
+        <BtnAddContact
+          // disabled
+          size="medium"
           type="submit"
-          sx={{ mt: 2 }}
         >
-          Add Contact
-        </Button>
+          <AddCircleOutlineIcon />
+        </BtnAddContact>
       </form>
       <Outlet />
     </Box>

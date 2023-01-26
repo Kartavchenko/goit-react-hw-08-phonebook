@@ -8,7 +8,7 @@ import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural
 import '@fontsource/roboto/500.css';
 import { Button, Typography } from '@mui/material';
 import unAuthBg from '../../images/blur_woman_taking_notes_notepad.jpg';
-import authBg from '../../images/blur_notes_background.jpg';
+import authBg from '../../images/blur_gradient_woman_taking_notes_notepad.jpg';
 import mainBg from '../../images/woman_taking_notes_notepad.jpg';
 import {
   MyAvatar,

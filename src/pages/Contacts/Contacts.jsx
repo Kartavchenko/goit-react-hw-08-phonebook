@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectModalOpen, selectModalContact, getState } from 'redax/selectors';
 import { ModalEdit } from 'components/Modal/ModalEdit';
 import { Typography } from '@mui/material';
-import { MyBox } from './Contacts.styled';
+import { MyBox, ListSearch } from './Contacts.styled';
 
 const Contacts = () => {
   const closeModal = useSelector(selectModalOpen);
@@ -14,15 +14,11 @@ const Contacts = () => {
 
   return (
     <MyBox sx={{ flexGrow: 1 }}>
-      <Typography component="h2" variant="h5">
-        Add Contact
-      </Typography>
       <FormContact />
-      <Filter />
-      <Typography component="h2" variant="h5" sx={{ ml: 5 }}>
-        Contacts
-      </Typography>
-      <ListContacts />
+      <ListSearch>
+        <Filter />
+        <ListContacts />
+      </ListSearch>
       {!openModal
         ? loading && (
             <Typography variant="h6" sx={{ ml: 5 }}>

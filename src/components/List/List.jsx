@@ -8,8 +8,14 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import Grid2 from '@mui/material/Unstable_Grid2';
-import { Typography, Button, Box } from '@mui/material';
+import {
+  BtnEdit,
+  ItemContact,
+  BtnDelete,
+  BoxList,
+  BoxBtn,
+  TypoContact,
+} from './List.styled';
 
 const ListContacts = () => {
   const dispatch = useDispatch();
@@ -31,71 +37,57 @@ const ListContacts = () => {
 
   const contact = items.map(({ id, name, number }) => {
     return (
-      <Grid2
+      <ItemContact
         component="li"
         key={id}
         flexGrow={2}
         container
-        rowSpacing={3}
-        spacing={2}
-        sx={{
-          listStyle: 'none',
-          alignItems: 'center',
-        }}
+        rowSpacing={-5}
+        spacing={4}
       >
-        <Grid2>
-          <Button
-            size="small"
-            variant="outlined"
-            startIcon={<DeleteIcon />}
+        <BoxBtn>
+          <BtnDelete
+            // variant="contained"
             type="button"
             onClick={() => deleteContact(id)}
           >
-            <Typography variant="caption">Delete</Typography>
-          </Button>
-        </Grid2>
-        <Grid2>
-          <Button
-            size="small"
-            variant="outlined"
-            startIcon={<EditIcon />}
+            <DeleteIcon />
+          </BtnDelete>
+          <BtnEdit
+            // variant="contained"
             type="button"
             onClick={() => editContactData(id)}
           >
-            <Typography variant="caption">Edit</Typography>
-          </Button>
-        </Grid2>
-        <Grid2>
-          <Typography
-            variant="subtitle1"
-            sx={{ display: 'flex', alignItems: 'center' }}
-          >
-            <AccountBoxIcon color="primary" />
-            {name}:
-          </Typography>
-        </Grid2>
-        <Grid2>
-          <Typography
-            variant="subtitle1"
-            sx={{ display: 'flex', alignItems: 'center' }}
-          >
-            <PhoneInTalkIcon color="primary" />
-            {number}
-          </Typography>
-        </Grid2>
-      </Grid2>
+            <EditIcon />
+          </BtnEdit>
+        </BoxBtn>
+        <TypoContact
+          variant="subtitle1"
+          sx={{ display: 'flex', alignItems: 'center' }}
+        >
+          <AccountBoxIcon color="primary" />
+          {name}
+        </TypoContact>
+        <TypoContact
+          variant="subtitle1"
+          sx={{ display: 'flex', alignItems: 'center' }}
+        >
+          <PhoneInTalkIcon color="primary" />
+          {number}
+        </TypoContact>
+      </ItemContact>
     );
   });
 
   return (
-    <Box component="ul" sx={{ p: 0, mt: 1 }}>
+    <BoxList component="ul">
       {items.length < 1 && (
-        <Typography variant="h6" sx={{ ml: 5 }}>
+        <TypoContact variant="h6" sx={{ ml: 5 }}>
           Haven't any contact...
-        </Typography>
+        </TypoContact>
       )}{' '}
       {contact}
-    </Box>
+    </BoxList>
   );
 };
 

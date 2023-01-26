@@ -14,6 +14,13 @@ export const HeaderBox = styled(Box)`
   background-repeat: no-repeat;
 `;
 
+export const MyBox = styled(Box)`
+  padding-top: 15px;
+  padding-bottom: 15px;
+  list-style: none;
+  padding-left: 0;
+`;
+
 export const MyTypography = styled(Typography)`
   padding: 10px 15px;
   border-radius: 3px;
@@ -28,13 +35,6 @@ export const MyTypography = styled(Typography)`
     color: #850541;
   }
 `
-
-export const MyBox = styled(Box)`
-  padding-top: 15px;
-  padding-bottom: 15px;
-  list-style: none;
-  padding-left: 0;
-`;
 
 export const List = styled(Grid2)`
   list-style: none;
