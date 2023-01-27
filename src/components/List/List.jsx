@@ -46,18 +46,10 @@ const ListContacts = () => {
         spacing={4}
       >
         <BoxBtn>
-          <BtnDelete
-            // variant="contained"
-            type="button"
-            onClick={() => deleteContact(id)}
-          >
+          <BtnDelete type="button" onClick={() => deleteContact(id)}>
             <DeleteIcon />
           </BtnDelete>
-          <BtnEdit
-            // variant="contained"
-            type="button"
-            onClick={() => editContactData(id)}
-          >
+          <BtnEdit type="button" onClick={() => editContactData(id)}>
             <EditIcon />
           </BtnEdit>
         </BoxBtn>

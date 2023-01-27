@@ -7,7 +7,7 @@ export const ItemContact = styled(Grid2)`
   padding: 10px 20px;
   min-width: 100px;
   max-width: 250px;
-  align-items: center;
+  flex-direction: column;
   box-shadow: inset 0 4px 4px rgba(0,0,0,0.1),
              4px 4px 16px rgba(0,0,0,0.3);
 
@@ -20,7 +20,6 @@ export const TypoContact = styled(Typography)`
 
 export const BtnEdit = styled(Button)`
   padding: 0;
-  margin-left: 85px;
 `
 
 export const BtnDelete = styled(Button)`

@@ -1,4 +1,4 @@
-export const selectUserData = ({user}) => user.body
+export const selectUserData = ({ user }) => user.body;
 
 export const selectModalContact = ({ modal }) => modal.editContact;
 

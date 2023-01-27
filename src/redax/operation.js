@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Report } from 'notiflix/build/notiflix-report-aio';
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://connections-api.herokuapp.com";
@@ -17,10 +18,15 @@ export const userRegister = createAsyncThunk(
     async (credentials) => {
         try {
             const { data } = await axios.post('/users/signup', credentials);
+            console.log(data)
             token.set(data.token)
             return data;
         } catch (error) {
-            return error;
+            Report.failure(
+                'Register Failure',
+                "Email in use or wrong format.",
+                'Okay')
+            console.log(error);
         }
     }
 );
@@ -33,7 +39,11 @@ export const userLoggedIn = createAsyncThunk(
             token.set(data.token)
             return data;
         } catch (error) {
-            return error
+            Report.failure(
+                'Login In Failure',
+                'Wrong email or password',
+                'Try arain');
+            console.log(error)
         }
     }
 );

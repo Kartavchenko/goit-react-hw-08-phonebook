@@ -2,12 +2,12 @@ import { useDispatch } from 'react-redux';
 import { userRegister } from 'redax/operation';
 import { NavLink } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { ContainerReg } from './RegisterUser.styled';
 import {
   Box,
   TextField,
   Button,
   Grid,
-  Container,
   Avatar,
   Typography,
 } from '@mui/material';
@@ -32,14 +32,7 @@ const RegisterUser = () => {
   };
   return (
     <Box>
-      <Container
-        maxWidth="sm"
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
+      <ContainerReg maxWidth="sm">
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
@@ -99,7 +92,7 @@ const RegisterUser = () => {
             <NavLink to="/login">Already have an account? Sign in</NavLink>
           </Grid>
         </Box>
-      </Container>
+      </ContainerReg>
     </Box>
   );
 };
