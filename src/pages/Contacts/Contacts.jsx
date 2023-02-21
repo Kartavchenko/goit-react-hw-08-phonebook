@@ -17,15 +17,15 @@ const Contacts = () => {
       <FormContact />
       <ListSearch>
         <Filter />
+        {!openModal
+          ? loading && (
+              <Typography variant="h6" sx={{ ml: 5 }}>
+                ...Loading
+              </Typography>
+            )
+          : null}
         <ListContacts />
       </ListSearch>
-      {!openModal
-        ? loading && (
-            <Typography variant="h6" sx={{ ml: 5 }}>
-              ...Loading
-            </Typography>
-          )
-        : null}
       {openModal ? <ModalEdit /> : closeModal}
     </MyBox>
   );

@@ -1,5 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { NavLink } from 'react-router-dom';
+import mainBg from '../../images/woman_taking_notes_notepad.jpg';
 import Grid2 from '@mui/material/Unstable_Grid2';
 import {
   Avatar,
@@ -12,6 +13,7 @@ export const HeaderBox = styled(Box)`
   height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
+  background-image: url("${ mainBg}");
 `;
 
 export const MyBox = styled(Box)`

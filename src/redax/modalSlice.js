@@ -9,7 +9,9 @@ const modalContact = createSlice({
     name: "modal",
     initialState,
     reducers: {
-        editContact: (state, {payload}) => {state.editContact = payload},
+        editContact: (state, { payload }) => {
+            state.editContact = payload;
+        },
     }
 })
 

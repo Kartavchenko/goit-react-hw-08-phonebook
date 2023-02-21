@@ -7,7 +7,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import '@fontsource/roboto/500.css';
 import { Button, Typography } from '@mui/material';
-import unAuthBg from '../../images/blur_woman_taking_notes_notepad.jpg';
 import authBg from '../../images/blur_gradient_woman_taking_notes_notepad.jpg';
 import mainBg from '../../images/woman_taking_notes_notepad.jpg';
 import {
@@ -33,22 +32,9 @@ const Header = () => {
   };
 
   useEffect(() => {
-    switch (location.pathname) {
-      case '/':
-        setBgImage(mainBg);
-        break;
-      case '/login':
-        setBgImage(unAuthBg);
-        break;
-      case '/register':
-        setBgImage(unAuthBg);
-        break;
-      case '/contacts':
-        setBgImage(authBg);
-        break;
-      default:
-        console.log(`default`);
-    }
+    if (location.pathname !== '/') {
+      setBgImage(authBg);
+    } else setBgImage(mainBg);
   }, [location]);
 
   return (
@@ -61,11 +47,7 @@ const Header = () => {
       <MyBox>
         {!isLoggedIn ? (
           <List component="ul" container direction="row">
-            <Items component="li">
-              <MyNavLink to="/">
-                <Button variant="button">Main</Button>
-              </MyNavLink>
-            </Items>
+            <Items component="li"></Items>
             <Items component="li">
               <MyNavLink to="/register">
                 <RegisterBtn variant="outlined">Register</RegisterBtn>
@@ -79,11 +61,7 @@ const Header = () => {
           </List>
         ) : (
           <List component="ul" container direction="row">
-            <Items component="li">
-              <MyNavLink to="/">
-                <MyTypography variant="button">Main</MyTypography>
-              </MyNavLink>
-            </Items>
+            <Items component="li"></Items>
             <Items component="li">
               <MyNavLink to="/contacts">
                 <MyTypography variant="button">Phonebook</MyTypography>

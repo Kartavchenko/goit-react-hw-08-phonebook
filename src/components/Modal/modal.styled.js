@@ -1,9 +1,4 @@
 import styled from "@emotion/styled";
-// import { styled } from '@mui/material/styles';
-// import {
-//     Box,
-// } from '@mui/material';
-// import imageBg from "../../images/dark-background-white-note-pen.jpg";
 
 export const Overlay = styled.div`
     position: fixed;
@@ -22,9 +17,9 @@ export const FormModal = styled.form`
     padding: 20px;
     border: 2px solid rgb(181, 170, 242);
     border-radius: 10px;
-    background-image: url(../../images/dark_background_white_note_pen.jpg);
     box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1),
              0.3em 0.3em 1em rgba(0,0,0,0.3);
+    background-color: rgb(190, 241, 247, 0.6);
 `;
 
 export const BoxInput = styled.div`
@@ -35,10 +30,3 @@ export const BoxInput = styled.div`
         margin-top: 0;
     }
 `;
-
-export const InputForm = styled.input`
-    width: 200px;
-    height: 25px;
-    border-radius: 8px;
-    border-color: whitesmoke;
-`

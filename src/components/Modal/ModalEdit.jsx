@@ -5,8 +5,8 @@ import { selectModalContact } from 'redax/selectors';
 import { editContact } from 'redax/modalSlice';
 import { patchContact } from 'redax/operation';
 import SaveIcon from '@mui/icons-material/Save';
-import { Typography, Button } from '@mui/material';
-import { Overlay, FormModal, InputForm, BoxInput } from './modal.styled';
+import { Typography, Button, TextField } from '@mui/material';
+import { Overlay, FormModal, BoxInput } from './modal.styled';
 
 export const ModalEdit = () => {
   const overlay = document.getElementById('popup-root');
@@ -54,7 +54,7 @@ export const ModalEdit = () => {
         <BoxInput>
           <label>
             <Typography variant="overline">Name</Typography>
-            <InputForm
+            <TextField
               type="text"
               name="name"
               onChange={e =>
@@ -76,7 +76,7 @@ export const ModalEdit = () => {
         <BoxInput>
           <label>
             <Typography variant="overline">Number</Typography>
-            <InputForm
+            <TextField
               type="tel"
               name="number"
               onChange={e =>
@@ -101,7 +101,7 @@ export const ModalEdit = () => {
           color="primary"
           startIcon={<SaveIcon />}
           variant="contained"
-          sx={{ mt: 2 }}
+          sx={{ mt: 2, backgroundColor: 'rgba(28, 130, 189, 0.6)' }}
         >
           Save Contact
         </Button>

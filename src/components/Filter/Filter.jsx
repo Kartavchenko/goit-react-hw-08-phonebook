@@ -32,7 +32,7 @@ function Filter() {
             </InputAdornment>
           ),
         }}
-      ></SearchField>
+      />
     </Box>
   );
 }

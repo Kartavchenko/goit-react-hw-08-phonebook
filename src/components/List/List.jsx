@@ -9,12 +9,12 @@ import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {
-  BtnEdit,
   ItemContact,
   BtnDelete,
   BoxList,
   BoxBtn,
   TypoContact,
+  BtnEdit,
 } from './List.styled';
 
 const ListContacts = () => {
