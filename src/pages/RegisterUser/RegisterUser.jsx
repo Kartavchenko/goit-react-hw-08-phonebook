@@ -72,6 +72,9 @@ const RegisterUser = () => {
             margin="normal"
             required
             fullWidth
+            inputProps={{
+              min="7"
+            }}
             name="password"
             label="Password"
             type="password"
